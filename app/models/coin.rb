@@ -18,7 +18,7 @@ class Coin < ApplicationRecord
   has_many :ticks
 
   validates :name, :uid, :symbol, :website_slug,
-            :circulating_supply, :total_supply, :max_supply, presence: true
+            :circulating_supply, :total_supply, presence: true
 
   def create_tick(data)
     ticks.create!(
