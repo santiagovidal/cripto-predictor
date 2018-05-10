@@ -1,14 +1,14 @@
 %h2 Hourly top
 %ol
   - @hourly_top_ticks.each do |tick|
-    %li= "#{tick.coin.name} | +#{tick.hourly_change}%"
+    %li= link_to(tick.coin.name, coin_path(tick.coin)) + " | +#{tick.hourly_change}%"
 
 %h2 Daily top
 %ol
   - @daily_top_ticks.each do |tick|
-    %li= "#{tick.coin.name} | +#{tick.daily_change}%"
+    %li= link_to(tick.coin.name, coin_path(tick.coin)) + " | +#{tick.daily_change}%"
 
 %h2 Weekly top
 %ol
   - @weekly_top_ticks.each do |tick|
-    %li= "#{tick.coin.name} | +#{tick.weekly_change}%"
+    %li= link_to(tick.coin.name, coin_path(tick.coin)) + " | +#{tick.weekly_change}%"

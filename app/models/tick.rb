@@ -31,4 +31,8 @@ class Tick < ApplicationRecord
   scope :hourly_top, -> { latest.order(hourly_change: :desc).limit(10) }
   scope :daily_top, -> { latest.order(daily_change: :desc).limit(10) }
   scope :weekly_top, -> { latest.order(weekly_change: :desc).limit(10) }
+
+  def self.delete_old_ticks
+    where('created_at < ?', 5.days.ago).destroy_all
+  end
 end

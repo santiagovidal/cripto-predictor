@@ -1,0 +1,20 @@
+%h2= coin.name
+
+%table.table
+  %thead
+    %th ID
+    %th Date
+    %th Price
+    %th Daily volume
+    %th Market cap
+    %th Rank
+
+  %tbody
+    - coin.ticks.each do |tick|
+      %tr
+        %td= tick.id
+        %td= tick.created_at
+        %td= tick.price
+        %td= tick.daily_volume
+        %td= tick.market_cap
+        %td= tick.rank
