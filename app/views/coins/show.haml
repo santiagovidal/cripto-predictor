@@ -10,7 +10,7 @@
     %th Rank
 
   %tbody
-    - coin.ticks.each do |tick|
+    - coin.ticks.order_desc.each do |tick|
       %tr
         %td= tick.id
         %td= tick.created_at

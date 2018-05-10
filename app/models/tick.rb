@@ -26,6 +26,7 @@ class Tick < ApplicationRecord
             :daily_change, :weekly_change, :rank, presence: true
 
   scope :latest, -> { where(id: Tick.order(id: :desc).limit(100)) }
+  scope :order_desc, -> { order(id: :desc) }
   scope :with_coin, -> { includes(:coin) }
 
   scope :hourly_top, -> { latest.order(hourly_change: :desc).limit(10) }
