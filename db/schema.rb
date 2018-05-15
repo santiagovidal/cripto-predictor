@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_01_183552) do
+ActiveRecord::Schema.define(version: 2018_05_14_231310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 2018_05_01_183552) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "predictions", force: :cascade do |t|
+    t.bigint "coin_id"
+    t.bigint "tick_id"
+    t.date "timeframe"
+    t.float "original_price"
+    t.float "highest_price_so_far"
+    t.boolean "successful", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["coin_id"], name: "index_predictions_on_coin_id"
+    t.index ["tick_id"], name: "index_predictions_on_tick_id"
+  end
+
   create_table "ticks", force: :cascade do |t|
     t.bigint "coin_id"
     t.float "price"
@@ -41,5 +54,7 @@ ActiveRecord::Schema.define(version: 2018_05_01_183552) do
     t.index ["coin_id"], name: "index_ticks_on_coin_id"
   end
 
+  add_foreign_key "predictions", "coins"
+  add_foreign_key "predictions", "ticks"
   add_foreign_key "ticks", "coins"
 end

@@ -1,0 +1,24 @@
+%h2 Active predictions
+
+%table.table
+  %thead
+    %th ID
+    %th Coin
+    %th Created at
+    %th Original price
+    %th High point
+    %th Timeframe
+
+  %tbody
+    - @predictions.each do |prediction|
+      %tr
+        %td= prediction.id
+        %td= prediction.coin.name
+        %td= prediction.created_at
+        %td= prediction.original_price
+        %td
+          = prediction.highest_price_so_far
+          - change = prediction.change_so_far
+          %span{ class: change > 0 ? 'change-indicator increase' : 'change-indicator decrease' }
+            = number_to_percentage(change, precision: 2)
+        %td= prediction.timeframe

@@ -25,6 +25,8 @@ class Tick < ApplicationRecord
   validates :price, :daily_volume, :market_cap, :hourly_change,
             :daily_change, :weekly_change, :rank, presence: true
 
+  after_create :update_predictions
+
   scope :latest, -> { where(id: Tick.order(id: :desc).limit(100)) }
   scope :order_desc, -> { order(id: :desc) }
   scope :with_coin, -> { includes(:coin) }
@@ -35,5 +37,17 @@ class Tick < ApplicationRecord
 
   def self.delete_old_ticks
     where('created_at < ?', 5.days.ago).destroy_all
+  end
+
+  private
+
+  def update_predictions
+    existing_prediction = coin.predictions.active.first
+
+    if existing_prediction
+      existing_prediction.update_price_so_far(price)
+    else
+      Prediction.create_if_conditions_match(self)
+    end
   end
 end

@@ -16,6 +16,7 @@
 
 class Coin < ApplicationRecord
   has_many :ticks
+  has_many :predictions
 
   validates :name, :uid, :symbol, :website_slug,
             :circulating_supply, :total_supply, presence: true

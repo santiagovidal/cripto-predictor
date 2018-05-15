@@ -5,3 +5,12 @@ header {
   a:hover { text-decoration: none; }
   a:visited { color: $logocolor; }
 }
+
+td {
+  span.change-indicator {
+    margin-left: 20px;
+
+    &.increase { color: green }
+    &.decrease { color: red }
+  }
+}
